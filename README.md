@@ -5,5 +5,7 @@ The DataStax Object Mapper – a powerful Java-to-CQL mapping framework that gre
 
 The application is quite simple: the user can add elements in a list using a form, and the items list is updated. All the information between the browser and the server is formatted as JSON, and the elements are stored in the Cassandra database.
 
-
-docker run --name cassandra bitnami/cassandra:latest
+docker run --name local-cassandra-instance -p 9042:9042 -d cassandra
+docker exec -it local-cassandra-instance cqlsh
+CREATE KEYSPACE IF NOT EXISTS k1 WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
+CREATE TABLE IF NOT EXISTS k1.fruit(name text PRIMARY KEY, description text);
