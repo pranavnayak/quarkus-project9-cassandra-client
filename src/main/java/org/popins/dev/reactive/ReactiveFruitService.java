@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.popins.dev;
+package org.popins.dev.reactive;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+
+import org.popins.dev.model.Fruit;
 
 /**
  * A service that manages {@link Fruit} objects using reactive-style programming. This service
