@@ -25,6 +25,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.popins.dev.model.Fruit;
+
+import io.smallrye.mutiny.Multi;
+
 /**
  * A REST resource exposing endpoints for creating and retrieving {@link Fruit} objects in the
  * database, leveraging the {@link FruitService} component.
@@ -37,20 +41,21 @@ public class FruitResource {
   @Inject FruitService fruitService;
 
   @GET
-  public List<FruitDto> getAll() {
-    return fruitService.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
+  public Multi<Fruit> getAll() {
+    //return fruitService.getAll().stream().map(this::convertToDto).collect(Collectors.toList());
+	  return fruitService.getAllFruits();
   }
 
   @POST
-  public void add(FruitDto fruit) {
-    fruitService.save(convertFromDto(fruit));
+  public void add(Fruit fruit) {
+    fruitService.save(fruit);
   }
-
+  /*
   private FruitDto convertToDto(Fruit fruit) {
     return new FruitDto(fruit.getName(), fruit.getDescription());
   }
 
   private Fruit convertFromDto(FruitDto fruitDto) {
     return new Fruit(fruitDto.getName(), fruitDto.getDescription());
-  }
+  }*/
 }
